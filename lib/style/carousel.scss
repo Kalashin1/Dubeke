@@ -1,0 +1,273 @@
+// MIXINS FOR SLIDES
+
+// HORIZONTAL SLIDE CONTAINER
+@mixin horizontal-slide {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    position: relative;
+    overflow: hidden;
+}
+
+@mixin slide {
+    width: 100%;
+    display: none;
+    position: relative;
+}
+
+// SLIDE IMAGE
+@mixin  slide-image {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+@mixin slide-control {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    z-index: 5;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+}
+
+//CONTROL BUTTONS CONTIANER
+@mixin control-buttons{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    width: max-content;
+    height: 100%;
+}
+
+//CONTROL BUTTONS
+@mixin button{
+    display: block;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+}
+
+
+// SLIDE INDICATORS
+@mixin slide-indicators{
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    bottom: 0;
+    z-index: 20;
+
+    .active{
+        background: grey;
+    }
+
+    span{
+        width: 25px;
+        height: 10px;
+        border-radius: 5%;
+        display: inline-block;
+        margin: .1rem;
+        background-color: #f1f1f1;
+    }
+}
+
+.slide-horizontal
+{
+    @include horizontal-slide();
+
+    .active{
+        animation: slide .3s ease-in forwards;
+        display: block;
+    }
+    
+
+    @media (min-width: 700px){
+        .slide-control{
+            .next{
+                position: relative;
+                left: -.5rem;
+            }
+
+            .prev{
+                position: relative;
+                left: .5rem;
+            }
+        }
+    }
+
+    .slide-control
+    {
+        @include slide-control();
+
+
+        .prev
+        {
+            
+            @include control-buttons();
+
+
+            span
+            {
+                @include button();
+                border-right: 20px solid currentColor;
+            }
+            
+        }
+        .next
+        {
+
+            @include control-buttons();
+
+            span
+            {
+                @include button();
+                border-left: 20px solid currentColor;
+            }
+            
+        }
+    }
+
+    .slide-indicators
+    {
+        @include slide-indicators();
+    }
+}
+
+
+
+
+
+// VERTICAL SLIDE
+.slide-vertical
+{
+    @include horizontal-slide();
+
+    .active{
+        animation: slideUp .3s ease-in forwards;
+        display: block;
+    }
+    
+
+    @media (min-width: 700px){
+        .slide-control{
+            .next{
+                position: relative;
+                left: -.5rem;
+            }
+
+            .prev{
+                position: relative;
+                left: .5rem;
+            }
+        }
+    }
+
+    .slide-control
+    {
+        @include slide-control();
+
+
+        .prev
+        {
+            
+            @include control-buttons();
+
+
+            span
+            {
+                @include button();
+                border-right: 20px solid currentColor;
+            }
+            
+        }
+        .next
+        {
+
+            @include control-buttons();
+
+            span
+            {
+                @include button();
+                border-left: 20px solid currentColor;
+            }
+            
+        }
+    }
+
+    .slide-indicators
+    {
+        @include slide-indicators();
+    }
+}
+
+
+
+
+
+.slide
+{
+    
+    @include slide();
+}
+
+.slide-img
+{
+    @include slide-image();
+}
+
+
+// ANIMATION
+ @keyframes slide{
+     0%{
+        opacity: 0;
+        
+     }
+
+    40%
+    {
+         opacity: .4;
+   }
+    80%{
+        opacity: .8;
+    }
+    100%{
+        opacity: 1;
+    }
+ }
+
+
+
+ @keyframes slideUp{
+     0%{
+        opacity: 0;
+        top: -300rem;
+
+     }
+
+    40%
+    {
+        opacity: .4;
+        top: -10rem;
+    }
+    80%{
+        opacity: .8;
+        top: -5rem;
+    }
+    100%{
+        opacity: 1;
+        top : 0;
+    }
+ }
+
+
